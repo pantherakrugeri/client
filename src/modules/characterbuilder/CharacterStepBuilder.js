@@ -1,11 +1,21 @@
-import React from "react";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Button from '@material-ui/core/Button';
 //import Abilities from "./abilities/abilities";
-import GenerateAbilities from "./abilities/GenerateAbilities";
-import Abilities from "./abilities/Abilities";
+import GenerateAbilities from './abilities/GenerateAbilities';
+//import Abilities from './abilities/Abilities';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = (theme) => ({
+	root: {
+		fontWeight: 'bold',
+	},
+	h2: {
+		color: '#4682B4',
+	},
+});
 
 class CharacterStepBuilder extends React.Component {
 	constructor(props) {
@@ -29,41 +39,39 @@ class CharacterStepBuilder extends React.Component {
 	}
 
 	render() {
+		const { classes } = this.props;
 		const step = this.state.step;
+
 		let stepfeature = null;
 		if (step === 0) {
-			//stepfeature = <GenerateAbilities />;
-            stepfeature = <Abilities />;
+			stepfeature = <GenerateAbilities />;
+			// stepfeature = <Abilities />;
 		} else {
 			stepfeature = (
-				<div styles="margin: 100;">
+				<div styles='margin: 100;'>
 					<h2>Place Holder</h2>
 				</div>
 			);
 		}
 		return (
-			<div>
-				<Stepper
-					alternativeLabel
-					nonLinear
-					activeStep={this.state.step}
-				>
-					<Step key="0">
+			<div className={classes.root}>
+				<Stepper alternativeLabel nonLinear activeStep={this.state.step}>
+					<Step key='0'>
 						<StepLabel>Generate Abilities</StepLabel>
 					</Step>
-					<Step key="1">
+					<Step key='1'>
 						<StepLabel>Choose Race</StepLabel>
 					</Step>
-					<Step key="2">
+					<Step key='2'>
 						<StepLabel>Choose Class</StepLabel>
 					</Step>
-					<Step key="3">
+					<Step key='3'>
 						<StepLabel>Pick Skills</StepLabel>
 					</Step>
-					<Step key="4">
+					<Step key='4'>
 						<StepLabel>Buy Equipment</StepLabel>
 					</Step>
-					<Step key="5">
+					<Step key='5'>
 						<StepLabel>Finish Details</StepLabel>
 					</Step>
 				</Stepper>
@@ -74,13 +82,11 @@ class CharacterStepBuilder extends React.Component {
 					Back
 				</Button>
 				<Button
-					variant="contained"
-					color="primary"
+					variant='contained'
+					color='primary'
 					onClick={() => this.handleNext()}
 				>
-					{this.state.step === this.stepLength
-						? "Finish"
-						: "Next"}
+					{this.state.step === this.stepLength ? 'Finish' : 'Next'}
 				</Button>
 				{stepfeature}
 			</div>
@@ -88,4 +94,5 @@ class CharacterStepBuilder extends React.Component {
 	}
 }
 
-export default CharacterStepBuilder;
+export default withStyles(styles, { withTheme: true })(CharacterStepBuilder);
+// export default CharacterStepBuilder;
