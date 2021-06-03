@@ -3,9 +3,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-//import Abilities from "./abilities/abilities";
 import GenerateAbilities from './abilities/GenerateAbilities';
-//import Abilities from './abilities/Abilities';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -45,7 +43,6 @@ class CharacterStepBuilder extends React.Component {
 		let stepfeature = null;
 		if (step === 0) {
 			stepfeature = <GenerateAbilities />;
-			// stepfeature = <Abilities />;
 		} else {
 			stepfeature = (
 				<div styles='margin: 100;'>
@@ -95,4 +92,3 @@ class CharacterStepBuilder extends React.Component {
 }
 
 export default withStyles(styles, { withTheme: true })(CharacterStepBuilder);
-// export default CharacterStepBuilder;
