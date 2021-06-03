@@ -210,7 +210,7 @@ function GenerateAbilities(props) {
 				align='center'
 				className={classes.heading}
 			>
-				Generate Abilities
+				{props.title}
 			</Typography>
 			<Grid
 				container

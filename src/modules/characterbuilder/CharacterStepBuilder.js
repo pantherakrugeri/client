@@ -42,7 +42,7 @@ class CharacterStepBuilder extends React.Component {
 
 		let stepfeature = null;
 		if (step === 0) {
-			stepfeature = <GenerateAbilities />;
+			stepfeature = <GenerateAbilities title='Generate Abilities' />;
 		} else {
 			stepfeature = (
 				<div styles='margin: 100;'>
