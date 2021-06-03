@@ -17,6 +17,9 @@ const theme = createMuiTheme({
 			main: '#B0C4DE',
 		},
 	},
+	typography: {
+		fontFamily: ['Arial', 'Verdana', 'sans-serif'].join(','),
+	},
 });
 
 function App() {
