@@ -1,8 +1,35 @@
-import "./RootView";
-import RootView from "./RootView";
+import './RootView';
+import RootView from './RootView';
+import './App.css';
+import NavBar from './components/layout/NavBar';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+	palette: {
+		primary: {
+			main: '#4682B4',
+		},
+		secondary: {
+			main: '#B0C4DE',
+		},
+	},
+});
 
 function App() {
-	return <RootView />;
+	return (
+		<div>
+			<ThemeProvider theme={theme}>
+				<NavBar title='Pathfinder' icon='dice-d20' />
+				<RootView />
+			</ThemeProvider>
+		</div>
+	);
 }
+
+library.add(fab, faDiceD20);
 
 export default App;
