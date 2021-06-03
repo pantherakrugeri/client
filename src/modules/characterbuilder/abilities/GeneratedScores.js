@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
 		padding: 25,
 	},
 	heading: {
-		textTransform: 'uppercase',
 		fontWeight: 'bolder',
 	},
 }));
@@ -17,15 +16,23 @@ function GeneratedScores(p) {
 
 	const renderLists = () => {
 		console.log(p);
-		p.scores.forEach((item) => <ListItem>{this.item}</ListItem>);
+		p.scores.forEach(function (item) {
+			console.log(item);
+			return <ListItem>item</ListItem>;
+		});
 	};
 
 	return (
 		<div className={classes.root}>
-			<Typography variant='h5' color='secondary' align='center'>
+			<Typography
+				variant='h6'
+				color='secondary'
+				align='center'
+				className={classes.heading}
+			>
 				Results
 			</Typography>
-			<List>{renderLists}</List>
+			<List>{renderLists()}</List>
 		</div>
 	);
 }
