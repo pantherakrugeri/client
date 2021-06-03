@@ -1,17 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
+import { makeStyles, Typography, List, ListItem } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		padding: 25,
+	},
+	heading: {
+		textTransform: 'uppercase',
+		fontWeight: 'bolder',
+	},
+}));
 
 function GeneratedScores(p) {
-	console.log(p.scores);
+	const classes = useStyles();
 
-	const renderLists = (p) => {
+	const renderLists = () => {
 		console.log(p);
-		p.scores.forEach((item) => <ListItem>console.log(item)</ListItem>);
+		p.scores.forEach((item) => <ListItem>{this.item}</ListItem>);
 	};
 
-	return <List>{renderLists(p)}</List>;
+	return (
+		<div className={classes.root}>
+			<Typography variant='h5' color='secondary' align='center'>
+				Results
+			</Typography>
+			<List>{renderLists}</List>
+		</div>
+	);
 }
 
 GeneratedScores.propTypes = {};

@@ -220,7 +220,7 @@ function GenerateAbilities(props) {
 				alignItems='flex-start'
 			>
 				<Abilities />
-				<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={'hello'} />
+				<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={1} />
 			</Grid>
 		</form>
 
