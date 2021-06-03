@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Abilities from './Abilities';
 import GeneratedScores from './GeneratedScores';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
 	root: {},
 	pad: {
 		padding: 50,
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 	boldLabels: {
 		fontWeight: 'bold',
 	},
-});
+}));
 
 function GenerateAbilities(props) {
 	// states
@@ -198,8 +198,8 @@ function GenerateAbilities(props) {
 			container
 			spacing={2}
 			direction='row'
-			//justify='flex-start'
-			//alignItems='flex-start'
+			justify='flex-start'
+			alignItems='flex-start'
 		>
 			<Abilities />
 			<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={'hello'} />
