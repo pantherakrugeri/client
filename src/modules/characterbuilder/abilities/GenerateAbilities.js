@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import Grid from '@material-ui/core/Grid';
@@ -12,7 +13,13 @@ import Abilities from './Abilities';
 import GeneratedScores from './GeneratedScores';
 
 const useStyles = makeStyles((theme) => ({
-	root: {},
+	root: {
+		margin: 25,
+	},
+	heading: {
+		textTransform: 'uppercase',
+		fontWeight: 'bolder',
+	},
 	pad: {
 		padding: 50,
 	},
@@ -194,16 +201,26 @@ function GenerateAbilities(props) {
 	};
 
 	return (
-		<Grid
-			container
-			spacing={2}
-			direction='row'
-			justify='flex-start'
-			alignItems='flex-start'
-		>
-			<Abilities />
-			<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={'hello'} />
-		</Grid>
+		<form className={classes.root} noValidate autoComplete='off'>
+			<Typography
+				variant='h5'
+				color='primary'
+				align='center'
+				className={classes.heading}
+			>
+				Generate Abilities
+			</Typography>
+			<Grid
+				container
+				spacing={2}
+				direction='row'
+				justify='flex-start'
+				alignItems='flex-start'
+			>
+				<Abilities />
+				<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={'hello'} />
+			</Grid>
+		</form>
 
 		// <form className={classes.root} noValidate autoComplete='off'>
 		//   <Grid
