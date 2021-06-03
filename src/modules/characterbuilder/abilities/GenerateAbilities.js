@@ -15,6 +15,8 @@ import GeneratedScores from './GeneratedScores';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: 25,
+		border: 'thin solid gray',
+		padding: 25,
 	},
 	heading: {
 		textTransform: 'uppercase',
