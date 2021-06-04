@@ -31,6 +31,14 @@ function GeneratedScores(p) {
 	);
 }
 
-GeneratedScores.propTypes = {};
+GeneratedScores.propTypes = {
+	scores: PropTypes.array,
+	numberOfSets: PropTypes.number,
+};
+
+GeneratedScores.defaultProps = {
+	scores: [],
+	numberOfSets: 0,
+};
 
 export default GeneratedScores;
