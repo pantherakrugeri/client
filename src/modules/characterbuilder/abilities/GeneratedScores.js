@@ -14,13 +14,7 @@ const useStyles = makeStyles((theme) => ({
 function GeneratedScores(p) {
 	const classes = useStyles();
 
-	const renderLists = () => {
-		console.log(p);
-		p.scores.forEach(function (item) {
-			console.log(item);
-			return <ListItem>item</ListItem>;
-		});
-	};
+	const listItems = p.scores.map((number) => <ListItem>{number}</ListItem>);
 
 	return (
 		<div className={classes.root}>
@@ -32,7 +26,7 @@ function GeneratedScores(p) {
 			>
 				Results
 			</Typography>
-			<List>{renderLists()}</List>
+			<List>{listItems}</List>
 		</div>
 	);
 }
