@@ -1,10 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { Typography } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Typography, makeStyles } from '@material-ui/core';
 
 import Grid from '@material-ui/core/Grid';
-import Ability from './components/Ability';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import InputLabel from '@material-ui/core/InputLabel';
@@ -16,25 +14,19 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: 25,
 		border: 'thin solid gray',
-		padding: 25,
+		padding: 50,
 	},
 	heading: {
 		textTransform: 'uppercase',
 		fontWeight: 'bolder',
 	},
-	pad: {
-		padding: 50,
-	},
-	abilityPad: {
-		padding: 10,
-	},
 	formControl: {
-		margin: 50,
+		margin: 25,
 		minWidth: 120,
 		width: 200,
 	},
-	boldLabels: {
-		fontWeight: 'bold',
+	genButton: {
+		margin: 100,
 	},
 }));
 
@@ -50,46 +42,6 @@ function GenerateAbilities(props) {
 	const [methodstyle, setMethodStyle] = useState('');
 
 	const classes = useStyles();
-
-	//initial config to pass into ability
-	const abilityConfig = [
-		{
-			abilityName: 'Strength',
-			abilityId: 'strength-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-		{
-			abilityName: 'Dexterity',
-			abilityId: 'dexterity-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-		{
-			abilityName: 'Constitution',
-			abilityId: 'constitution-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-		{
-			abilityName: 'Intelligence',
-			abilityId: 'intelligence-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-		{
-			abilityName: 'Wisdom',
-			abilityId: 'wisdom-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-		{
-			abilityName: 'Charisma',
-			abilityId: 'charisma-id',
-			abilityType: 'number',
-			abilityValue: 0,
-		},
-	];
 
 	function generateScores(min, max) {
 		let strength = [];
@@ -219,162 +171,95 @@ function GenerateAbilities(props) {
 				justify='flex-start'
 				alignItems='flex-start'
 			>
+				<FormControl className={classes.formControl}>
+					<InputLabel htmlFor='method-native-simple'>
+						Generation Method
+					</InputLabel>
+					<Select
+						native
+						value={generationmethod}
+						onChange={handleGenerationMethod}
+						inputProps={{
+							name: 'generationmethod',
+							id: 'method-native-simple',
+						}}
+					>
+						<option aria-label='None' value='' />
+						<option value={'standard'}>Standard</option>
+						<option value={'classic'}>Classic</option>
+						<option value={'heroic'}>Heroic</option>
+						<option value={'purchase'}>Purchase</option>
+					</Select>
+					{generationmethod === 'standard' && <div>Standard: 4d6</div>}
+					{generationmethod === 'classic' && <div>Classic: 3d6</div>}
+					{generationmethod === 'heroic' && <div>Heroic: 2d6 + 6</div>}
+					{generationmethod === 'purchase' && (
+						<div>Choose Style of Campaign</div>
+					)}
+				</FormControl>
+
+				<FormControl className={classes.formControl}>
+					<InputLabel htmlFor='methodstyle-native-simple'>
+						Method Style
+					</InputLabel>
+					<Select
+						hidden
+						native
+						value={methodstyle}
+						onChange={handleMethodStyle}
+						inputProps={{
+							name: 'methodstyle',
+							id: 'methodstyle-native-simple',
+						}}
+					>
+						<option aria-label='None' value='' />
+						<option value={'random'}>Assign Randomly</option>
+						<option value={'choose'}>Assign from Pool</option>
+					</Select>
+				</FormControl>
+			</Grid>
+			<Grid
+				container
+				spacing={2}
+				direction='column'
+				justify='flex-start'
+				alignItems='flex-start'
+			>
 				<Abilities />
-				<GeneratedScores scores={[1, 3, 5, 7, 9]} numberOfSets={1} />
+				{(generationmethod === 'standard' ||
+					generationmethod === 'classic' ||
+					generationmethod === 'heroic') &&
+					methodstyle !== '' && (
+						<Button
+							variant='contained'
+							color='primary'
+							// style={{ position: 'relative', left: 110 }}
+							onClick={() => handleGenerateAbilities()}
+						>
+							Generate Abilities
+						</Button>
+					)}
+			</Grid>
+			<Grid
+				container
+				spacing={1}
+				direction='row'
+				justify='flex-start'
+				alignItems='flex-start'
+			>
+				<GeneratedScores
+					scores={[
+						strength,
+						dexterity,
+						constitution,
+						intelligence,
+						wisdom,
+						charisma,
+					]}
+					numberOfSets={1}
+				/>
 			</Grid>
 		</form>
-
-		// <form className={classes.root} noValidate autoComplete='off'>
-		//   <Grid
-		//     container
-		//     spacing={1}
-		//     direction='row'
-		//     justify='flex-start'
-		//     alignItems='flex-start'
-		//   >
-		//     <FormControl className={classes.formControl}>
-		//       <InputLabel htmlFor='method-native-simple'>
-		//         Generation Method
-		//       </InputLabel>
-		//       <Select
-		//         native
-		//         value={generationmethod}
-		//         onChange={handleGenerationMethod}
-		//         inputProps={{
-		//           name: "generationmethod",
-		//           id: "method-native-simple",
-		//         }}
-		//       >
-		//         <option aria-label='None' value='' />
-		//         <option value={"standard"}>Standard</option>
-		//         <option value={"classic"}>Classic</option>
-		//         <option value={"heroic"}>Heroic</option>
-		//         <option value={"purchase"}>Purchase</option>
-		//       </Select>
-		//       {generationmethod === "standard" && <div>Standard: 4d6</div>}
-		//       {generationmethod === "classic" && <div>Classic: 3d6</div>}
-		//       {generationmethod === "heroic" && <div>Heroic: 2d6 + 6</div>}
-		//       {generationmethod === "purchase" && (
-		//         <div>Choose Style of Campaign</div>
-		//       )}
-		//     </FormControl>
-
-		//     <FormControl className={classes.formControl}>
-		//       <InputLabel htmlFor='methodstyle-native-simple'>
-		//         Method Style
-		//       </InputLabel>
-		//       <Select
-		//         hidden
-		//         native
-		//         value={methodstyle}
-		//         onChange={handleMethodStyle}
-		//         inputProps={{
-		//           name: "methodstyle",
-		//           id: "methodstyle-native-simple",
-		//         }}
-		//       >
-		//         <option aria-label='None' value='' />
-		//         <option value={"random"}>Assign Randomly</option>
-		//         <option value={"choose"}>Assign from Pool</option>
-		//       </Select>
-		//     </FormControl>
-		//   </Grid>
-
-		//   <Grid
-		//     className={classes.pad}
-		//     container
-		//     spacing={1}
-		//     direction='column'
-		//     justify='flex-start'
-		//     alignItems='flex-start'
-		//   >
-		//     <Ability
-		//       inputProps={{ min: 0 }}
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[0].abilityId}
-		//       abilityName={abilityConfig[0].abilityName}
-		//       abilityType={abilityConfig[0].abilityType}
-		//       abilityValue={strength}
-		//       onChange={(e) => setStrength(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     <Ability
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[1].abilityId}
-		//       abilityName={abilityConfig[1].abilityName}
-		//       abilityType={abilityConfig[1].abilityType}
-		//       abilityValue={dexterity}
-		//       onChange={(e) => setDexterity(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     <Ability
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[2].abilityId}
-		//       abilityName={abilityConfig[2].abilityName}
-		//       abilityType={abilityConfig[2].abilityType}
-		//       abilityValue={constitution}
-		//       onChange={(e) => setConstitution(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     <Ability
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[3].abilityId}
-		//       abilityName={abilityConfig[3].abilityName}
-		//       abilityType={abilityConfig[3].abilityType}
-		//       abilityValue={intelligence}
-		//       onChange={(e) => setIntelligence(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     <Ability
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[4].abilityId}
-		//       abilityName={abilityConfig[4].abilityName}
-		//       abilityType={abilityConfig[4].abilityType}
-		//       abilityValue={wisdom}
-		//       onChange={(e) => setWisdom(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     <Ability
-		//       className={classes.abilityPad}
-		//       abilityId={abilityConfig[5].abilityId}
-		//       abilityName={abilityConfig[5].abilityName}
-		//       abilityType={abilityConfig[5].abilityType}
-		//       abilityValue={charisma}
-		//       onChange={(e) => setCharisma(e.target.value)}
-		//       InputLabelProps={{
-		//         shrink: true,
-		//         className: classes.boldLabels,
-		//       }}
-		//     />
-		//     {(generationmethod === "standard" ||
-		//       generationmethod === "classic" ||
-		//       generationmethod === "heroic") &&
-		//       methodstyle !== "" && (
-		//         <Button
-		//           variant='contained'
-		//           color='primary'
-		//           onClick={() => handleGenerateAbilities()}
-		//         >
-		//           Generate Abilities
-		//         </Button>
-		//       )}
-		//   </Grid>
-		// </form>
 	);
 }
 
