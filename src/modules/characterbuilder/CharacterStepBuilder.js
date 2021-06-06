@@ -8,7 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
 	root: {
-		fontWeight: 'bold',
+		fontWeight: '1000',
 	},
 	h2: {
 		color: '#4682B4',

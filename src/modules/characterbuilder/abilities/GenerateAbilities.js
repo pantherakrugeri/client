@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Typography, makeStyles } from '@material-ui/core';
+import { Typography, makeStyles, Divider, Container } from '@material-ui/core';
 
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -13,7 +13,9 @@ import GeneratedScores from './GeneratedScores';
 const useStyles = makeStyles((theme) => ({
 	root: {
 		margin: 25,
-		border: 'thin solid gray',
+		border: '1.75px solid gray',
+		borderRadius: '10px',
+		boxShadow: '2px 5px 8px gray',
 		padding: 50,
 	},
 	heading: {
@@ -21,12 +23,9 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: 'bolder',
 	},
 	formControl: {
-		margin: 25,
+		margin: 0,
 		minWidth: 120,
-		width: 200,
-	},
-	genButton: {
-		margin: 100,
+		width: 150,
 	},
 }));
 
@@ -164,100 +163,97 @@ function GenerateAbilities(props) {
 			>
 				{props.title}
 			</Typography>
-			<Grid
-				container
-				spacing={2}
-				direction='row'
-				justify='flex-start'
-				alignItems='flex-start'
-			>
-				<FormControl className={classes.formControl}>
-					<InputLabel htmlFor='method-native-simple'>
-						Generation Method
-					</InputLabel>
-					<Select
-						native
-						value={generationmethod}
-						onChange={handleGenerationMethod}
-						inputProps={{
-							name: 'generationmethod',
-							id: 'method-native-simple',
-						}}
-					>
-						<option aria-label='None' value='' />
-						<option value={'standard'}>Standard</option>
-						<option value={'classic'}>Classic</option>
-						<option value={'heroic'}>Heroic</option>
-						<option value={'purchase'}>Purchase</option>
-					</Select>
-					{generationmethod === 'standard' && <div>Standard: 4d6</div>}
-					{generationmethod === 'classic' && <div>Classic: 3d6</div>}
-					{generationmethod === 'heroic' && <div>Heroic: 2d6 + 6</div>}
-					{generationmethod === 'purchase' && (
-						<div>Choose Style of Campaign</div>
-					)}
-				</FormControl>
+			<Grid container direction='row'>
+				<Grid
+					id='left-container'
+					item
+					container
+					xs='3'
+					direction='column'
+					spacing={2}
+				>
+					<Grid item>
+						<FormControl className={classes.formControl}>
+							<InputLabel htmlFor='method-native-simple'>
+								Generation Method
+							</InputLabel>
+							<Select
+								native
+								value={generationmethod}
+								onChange={handleGenerationMethod}
+								inputProps={{
+									name: 'generationmethod',
+									id: 'method-native-simple',
+								}}
+							>
+								<option aria-label='None' value='' />
+								<option value={'standard'}>Standard</option>
+								<option value={'classic'}>Classic</option>
+								<option value={'heroic'}>Heroic</option>
+								<option value={'purchase'}>Purchase</option>
+							</Select>
+							{generationmethod === 'standard' && <div>Standard: 4d6</div>}
+							{generationmethod === 'classic' && <div>Classic: 3d6</div>}
+							{generationmethod === 'heroic' && <div>Heroic: 2d6 + 6</div>}
+							{generationmethod === 'purchase' && (
+								<div>Choose Style of Campaign</div>
+							)}
+						</FormControl>
+					</Grid>
+					<Grid item>
+						<FormControl className={classes.formControl}>
+							<InputLabel htmlFor='methodstyle-native-simple'>
+								Method Style
+							</InputLabel>
+							<Select
+								hidden
+								native
+								value={methodstyle}
+								onChange={handleMethodStyle}
+								inputProps={{
+									name: 'methodstyle',
+									id: 'methodstyle-native-simple',
+								}}
+							>
+								<option aria-label='None' value='' />
+								<option value={'random'}>Assign Randomly</option>
+								<option value={'choose'}>Assign from Pool</option>
+							</Select>
+						</FormControl>
+					</Grid>
+					<Grid item>
+						{(generationmethod === 'standard' ||
+							generationmethod === 'classic' ||
+							generationmethod === 'heroic') &&
+							methodstyle !== '' && (
+								<Button
+									variant='contained'
+									color='primary'
+									onClick={() => handleGenerateAbilities()}
+								>
+									Generate Abilities
+								</Button>
+							)}
+					</Grid>
+				</Grid>
+				<Grid item container xs='6'>
+					<Divider orientation='vertical' flexItem />
 
-				<FormControl className={classes.formControl}>
-					<InputLabel htmlFor='methodstyle-native-simple'>
-						Method Style
-					</InputLabel>
-					<Select
-						hidden
-						native
-						value={methodstyle}
-						onChange={handleMethodStyle}
-						inputProps={{
-							name: 'methodstyle',
-							id: 'methodstyle-native-simple',
-						}}
-					>
-						<option aria-label='None' value='' />
-						<option value={'random'}>Assign Randomly</option>
-						<option value={'choose'}>Assign from Pool</option>
-					</Select>
-				</FormControl>
-			</Grid>
-			<Grid
-				container
-				spacing={2}
-				direction='column'
-				justify='flex-start'
-				alignItems='flex-start'
-			>
-				<Abilities />
-				{(generationmethod === 'standard' ||
-					generationmethod === 'classic' ||
-					generationmethod === 'heroic') &&
-					methodstyle !== '' && (
-						<Button
-							variant='contained'
-							color='primary'
-							// style={{ position: 'relative', left: 110 }}
-							onClick={() => handleGenerateAbilities()}
-						>
-							Generate Abilities
-						</Button>
-					)}
-			</Grid>
-			<Grid
-				container
-				spacing={1}
-				direction='row'
-				justify='flex-start'
-				alignItems='flex-start'
-			>
-				<GeneratedScores
-					scores={[
-						strength,
-						dexterity,
-						constitution,
-						intelligence,
-						wisdom,
-						charisma,
-					]}
-					numberOfSets={1}
-				/>
+					<Abilities title={'Abilities'} />
+
+					<GeneratedScores
+						scores={[
+							strength,
+							dexterity,
+							constitution,
+							intelligence,
+							wisdom,
+							charisma,
+						]}
+						numberOfSets={1}
+						title={'Results'}
+					/>
+				</Grid>
 			</Grid>
 		</form>
 	);

@@ -47,7 +47,6 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		display: 'flex',
 		height: '100%',
-
 		label: {
 			fontWeight: 'bolder',
 		},
@@ -55,6 +54,9 @@ const useStyles = makeStyles((theme) => ({
 	tabs: {
 		borderRight: `1px solid ${theme.palette.divider}`,
 		fontWeight: 'bolder',
+	},
+	TabPanel: {
+		width: '100%',
 	},
 }));
 
@@ -80,7 +82,7 @@ export default function CharacterTabs() {
 				<Tab label='Character Generation' {...a11yProps(0)} />
 				<Tab label='Character Administration' {...a11yProps(1)} />
 			</Tabs>
-			<TabPanel value={value} index={0}>
+			<TabPanel value={value} index={0} className={classes.TabPanel}>
 				Character Generation Wizard
 				<CharacterStepBuilder />
 			</TabPanel>

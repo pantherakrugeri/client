@@ -24,7 +24,7 @@ function GeneratedScores(p) {
 				align='center'
 				className={classes.heading}
 			>
-				Results
+				{p.title}
 			</Typography>
 			<List>{listItems}</List>
 		</div>
