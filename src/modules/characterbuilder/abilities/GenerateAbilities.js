@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Typography, makeStyles, Divider, Container } from '@material-ui/core';
+import { Typography, makeStyles, Divider } from '@material-ui/core';
 
 import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
@@ -25,7 +25,10 @@ const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: 0,
 		minWidth: 120,
-		width: 150,
+		width: 250,
+	},
+	formLabel: {
+		fontWeight: 'bold',
 	},
 }));
 
@@ -39,16 +42,25 @@ function GenerateAbilities(props) {
 	const [charisma, setCharisma] = useState(0);
 	const [generationmethod, setGenerationMethod] = useState('');
 	const [methodstyle, setMethodStyle] = useState('');
+	const [diceResults, setDiceResults] = useState([
+		[0, 0, 0, 0],
+		[0, 0, 0, 0],
+		[0, 0, 0, 0],
+		[0, 0, 0, 0],
+		[0, 0, 0, 0],
+		[0, 0, 0, 0],
+	]);
+	const [genResults, setGenResults] = useState([]);
 
 	const classes = useStyles();
 
 	function generateScores(min, max) {
-		let strength = [];
-		let dexterity = [];
-		let constitution = [];
-		let intelligence = [];
-		let wisdom = [];
-		let charisma = [];
+		let str = [];
+		let dex = [];
+		let con = [];
+		let int = [];
+		let wis = [];
+		let cha = [];
 		let rolls = 0;
 
 		if (generationmethod === 'standard') {
@@ -64,53 +76,64 @@ function GenerateAbilities(props) {
 		let i = 0;
 		do {
 			i += 1;
-			strength.push(Math.floor(Math.random() * (max - min + 1) + min));
-			dexterity.push(Math.floor(Math.random() * (max - min + 1) + min));
-			constitution.push(Math.floor(Math.random() * (max - min + 1) + min));
-			intelligence.push(Math.floor(Math.random() * (max - min + 1) + min));
-			wisdom.push(Math.floor(Math.random() * (max - min + 1) + min));
-			charisma.push(Math.floor(Math.random() * (max - min + 1) + min));
+			str.push(Math.floor(Math.random() * (max - min + 1) + min));
+			dex.push(Math.floor(Math.random() * (max - min + 1) + min));
+			con.push(Math.floor(Math.random() * (max - min + 1) + min));
+			int.push(Math.floor(Math.random() * (max - min + 1) + min));
+			wis.push(Math.floor(Math.random() * (max - min + 1) + min));
+			cha.push(Math.floor(Math.random() * (max - min + 1) + min));
 		} while (i < rolls);
-		strength.sort(function (a, b) {
+		str.sort(function (a, b) {
 			return b - a;
 		});
-		dexterity.sort(function (a, b) {
+		dex.sort(function (a, b) {
 			return b - a;
 		});
-		constitution.sort(function (a, b) {
+		con.sort(function (a, b) {
 			return b - a;
 		});
-		intelligence.sort(function (a, b) {
+		int.sort(function (a, b) {
 			return b - a;
 		});
-		wisdom.sort(function (a, b) {
+		wis.sort(function (a, b) {
 			return b - a;
 		});
-		charisma.sort(function (a, b) {
+		cha.sort(function (a, b) {
 			return b - a;
 		});
 
-		console.log(strength);
-		console.log(dexterity);
-		console.log(constitution);
-		console.log(intelligence);
-		console.log(wisdom);
-		console.log(charisma);
+		tempScores[0].diceResults = [];
+		console.log(tempScores);
+
+		tempScores[0].diceResults.push(str);
+		tempScores[0].diceResults.push(dex);
+		tempScores[0].diceResults.push(con);
+		tempScores[0].diceResults.push(int);
+		tempScores[0].diceResults.push(wis);
+		tempScores[0].diceResults.push(cha);
+		setDiceResults(tempScores[0].diceResults);
+
+		console.log(str);
+		console.log(dex);
+		console.log(con);
+		console.log(int);
+		console.log(wis);
+		console.log(cha);
 
 		if (generationmethod === 'heroic') {
-			strength = strength[0] + strength[1] + 6;
-			dexterity = dexterity[0] + dexterity[1] + 6;
-			constitution = constitution[0] + constitution[1] + 6;
-			intelligence = intelligence[0] + intelligence[1] + 6;
-			wisdom = wisdom[0] + wisdom[1] + 6;
-			charisma = charisma[0] + charisma[1] + 6;
+			str = str[0] + str[1] + 6;
+			dex = dex[0] + dex[1] + 6;
+			con = con[0] + con[1] + 6;
+			int = int[0] + int[1] + 6;
+			wis = wis[0] + wis[1] + 6;
+			cha = cha[0] + cha[1] + 6;
 		} else if (generationmethod === 'standard' || 'classic') {
-			strength = strength[0] + strength[1] + strength[2];
-			dexterity = dexterity[0] + dexterity[1] + dexterity[2];
-			constitution = constitution[0] + constitution[1] + constitution[2];
-			intelligence = intelligence[0] + intelligence[1] + intelligence[2];
-			wisdom = wisdom[0] + wisdom[1] + wisdom[2];
-			charisma = charisma[0] + charisma[1] + charisma[2];
+			str = str[0] + str[1] + str[2];
+			dex = dex[0] + dex[1] + dex[2];
+			con = con[0] + con[1] + con[2];
+			int = int[0] + int[1] + int[2];
+			wis = wis[0] + wis[1] + wis[2];
+			cha = cha[0] + cha[1] + cha[2];
 		}
 
 		if (generationmethod === 'purchase') {
@@ -122,13 +145,17 @@ function GenerateAbilities(props) {
 			setCharisma(10);
 		} else {
 			// set state
-			setStrength(strength);
-			setDexterity(dexterity);
-			setConstitution(constitution);
-			setIntelligence(intelligence);
-			setWisdom(wisdom);
-			setCharisma(charisma);
+			setStrength(str);
+			setDexterity(dex);
+			setConstitution(con);
+			setIntelligence(int);
+			setWisdom(wis);
+			setCharisma(cha);
 		}
+		tempScores[0].data.length = 0;
+		console.log(tempScores);
+		tempScores[0].data = [str, dex, con, int, wis, cha];
+		console.log(tempScores);
 	}
 
 	const handleGenerationMethod = (event) => {
@@ -153,6 +180,26 @@ function GenerateAbilities(props) {
 		generateScores(1, 6);
 	};
 
+	let tempScores = [
+		{
+			title: 'Result 1',
+			data: [strength, dexterity, constitution, intelligence, wisdom, charisma],
+			diceResults: diceResults,
+		},
+		{
+			title: 'Result 2',
+			data: [4, 7, 9, 11, 13, 15],
+			diceResults: [
+				[2, 1, 1, 1],
+				[3, 3, 1, 1],
+				[3, 3, 3, 1],
+				[5, 4, 2, 1],
+				[6, 6, 1, 1],
+				[5, 5, 5, 1],
+			],
+		},
+	];
+
 	return (
 		<form className={classes.root} noValidate autoComplete='off'>
 			<Typography
@@ -163,18 +210,27 @@ function GenerateAbilities(props) {
 			>
 				{props.title}
 			</Typography>
-			<Grid container direction='row'>
+			<Grid
+				container
+				direction='row'
+				alignItems='flex-start'
+				alignContent='flex-start'
+				spacing={1}
+			>
 				<Grid
 					id='left-container'
 					item
 					container
-					xs='3'
+					lg={2}
 					direction='column'
 					spacing={2}
 				>
 					<Grid item>
 						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor='method-native-simple'>
+							<InputLabel
+								htmlFor='method-native-simple'
+								className={classes.formLabel}
+							>
 								Generation Method
 							</InputLabel>
 							<Select
@@ -202,7 +258,10 @@ function GenerateAbilities(props) {
 					</Grid>
 					<Grid item>
 						<FormControl className={classes.formControl}>
-							<InputLabel htmlFor='methodstyle-native-simple'>
+							<InputLabel
+								htmlFor='methodstyle-native-simple'
+								className={classes.formLabel}
+							>
 								Method Style
 							</InputLabel>
 							<Select
@@ -236,22 +295,22 @@ function GenerateAbilities(props) {
 							)}
 					</Grid>
 				</Grid>
-				<Grid item container xs='6'>
+				<Grid
+					id='right-container'
+					item
+					container
+					lg={5}
+					justify='flex-start'
+					alignItems='flex-start'
+				>
 					<Divider orientation='vertical' flexItem />
 
 					<Abilities title={'Abilities'} />
 
 					<GeneratedScores
-						scores={[
-							strength,
-							dexterity,
-							constitution,
-							intelligence,
-							wisdom,
-							charisma,
-						]}
-						numberOfSets={1}
-						title={'Results'}
+						scores={tempScores}
+						results={genResults}
+						methodStyle={methodstyle}
 					/>
 				</Grid>
 			</Grid>

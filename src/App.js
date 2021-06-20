@@ -4,7 +4,15 @@ import './App.css';
 import NavBar from './components/layout/NavBar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
+import {
+	faDiceD20,
+	faDiceSix,
+	faDiceFive,
+	faDiceFour,
+	faDiceThree,
+	faDiceTwo,
+	faDiceOne,
+} from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -33,6 +41,15 @@ function App() {
 	);
 }
 
-library.add(fab, faDiceD20);
+library.add(
+	fab,
+	faDiceD20,
+	faDiceSix,
+	faDiceFive,
+	faDiceFour,
+	faDiceThree,
+	faDiceTwo,
+	faDiceOne
+);
 
 export default App;
