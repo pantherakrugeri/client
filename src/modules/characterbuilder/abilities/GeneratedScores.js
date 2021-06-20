@@ -45,12 +45,6 @@ const HtmlTooltip = withStyles((theme) => ({
 	},
 }))(Tooltip);
 
-// section.diceResults.map((scores) =>
-// 	scores.map((die) => (
-
-// 	))
-// )
-
 const GeneratedScores = (props) => {
 	const classes = useStyles();
 
@@ -101,6 +95,7 @@ const GeneratedScores = (props) => {
 									<div ref={React.createRef()}>
 										{section.diceResults[index].map((die, index) => (
 											<FontAwesomeIcon
+												key={'die' + Math.random()}
 												icon={getIcon(die)}
 												className={classes.diceIcon}
 												color='#FFDB58'
@@ -155,7 +150,7 @@ GeneratedScores.propTypes = {
 };
 
 GeneratedScores.defaultProps = {
-	title: 'Results',
+	title: '',
 };
 
 export default GeneratedScores;
