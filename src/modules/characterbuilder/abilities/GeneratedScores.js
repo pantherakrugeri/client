@@ -143,9 +143,8 @@ const GeneratedScores = (props) => {
 };
 
 GeneratedScores.propTypes = {
-	scores: PropTypes.arrayOf(
-		PropTypes.objectOf(PropTypes.string, PropTypes.arrayOf(PropTypes.number))
-	).isRequired,
+	scores: PropTypes.array,
+	results: PropTypes.array.isRequired,
 	title: PropTypes.string,
 };
 
