@@ -78,6 +78,11 @@ const GeneratedScores = (props) => {
 		}
 		return icon + dieText;
 	};
+
+	if (!props.showResults) {
+		return null;
+	}
+
 	let listItems = '';
 
 	if (props.methodStyle === 'choose') {

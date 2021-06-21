@@ -51,6 +51,7 @@ function GenerateAbilities(props) {
 		[0, 0, 0, 0],
 	]);
 	const [genResults, setGenResults] = useState([]);
+	const [showResults, setShowResults] = useState(false);
 
 	const classes = useStyles();
 
@@ -175,6 +176,7 @@ function GenerateAbilities(props) {
 
 	const handleGenerateAbilities = () => {
 		generateScores(1, 6);
+		if (methodstyle === 'choose') setShowResults(true);
 	};
 
 	let tempScores = [
@@ -302,6 +304,7 @@ function GenerateAbilities(props) {
 						scores={tempScores}
 						results={genResults}
 						methodStyle={methodstyle}
+						showResults={showResults}
 					/>
 				</Grid>
 			</Grid>
