@@ -56,8 +56,6 @@ class Abilities extends React.Component {
 
 	componentDidMount() {
 		this.getAbilities();
-		console.log(localStorage.getItem('abilities'));
-		console.log(this.getAbilities());
 		let persistedAbilities = localStorage.getItem('abilities');
 
 		if (persistedAbilities === null) {
@@ -65,14 +63,11 @@ class Abilities extends React.Component {
 				this.setState({ [abilityName]: 0 })
 			);
 		}
-		console.log(this.state);
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		console.log(this.state);
-		let persistedAbilities = localStorage.getItem('abilities');
-		localStorage.setItem('abilities', JSON.stringify(this.state));
-		console.log('persistedAbilities: ', JSON.parse(persistedAbilities));
+		//let persistedAbilities = localStorage.getItem('abilities');
+		//localStorage.setItem('abilities', JSON.stringify(this.state));
 	}
 
 	getAbilities() {

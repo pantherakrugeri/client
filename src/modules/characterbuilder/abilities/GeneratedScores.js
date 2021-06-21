@@ -79,7 +79,6 @@ const GeneratedScores = (props) => {
 		return icon + dieText;
 	};
 	let listItems = '';
-	let rndInt = () => Math.floor(Math.random() * 6) + 1;
 
 	if (props.methodStyle === 'choose') {
 		listItems = propList.map((section) => (

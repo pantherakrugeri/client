@@ -71,8 +71,6 @@ function GenerateAbilities(props) {
 			rolls = 2;
 		}
 
-		console.log(generationmethod);
-
 		let i = 0;
 		do {
 			i += 1;
@@ -103,7 +101,6 @@ function GenerateAbilities(props) {
 		});
 
 		tempScores[0].diceResults = [];
-		console.log(tempScores);
 
 		tempScores[0].diceResults.push(str);
 		tempScores[0].diceResults.push(dex);
@@ -153,9 +150,9 @@ function GenerateAbilities(props) {
 			setCharisma(cha);
 		}
 		tempScores[0].data.length = 0;
-		console.log(tempScores);
 		tempScores[0].data = [str, dex, con, int, wis, cha];
-		console.log(tempScores);
+		setGenResults(tempScores);
+		console.log({ genResults });
 	}
 
 	const handleGenerationMethod = (event) => {
@@ -221,7 +218,7 @@ function GenerateAbilities(props) {
 					id='left-container'
 					item
 					container
-					lg={2}
+					//lg={4}
 					direction='column'
 					spacing={2}
 				>
@@ -295,15 +292,9 @@ function GenerateAbilities(props) {
 							)}
 					</Grid>
 				</Grid>
-				<Grid
-					id='right-container'
-					item
-					container
-					lg={5}
-					justify='flex-start'
-					alignItems='flex-start'
-				>
-					<Divider orientation='vertical' flexItem />
+
+				<Grid id='right-container' item container>
+					{/* <Divider orientation='vertical' flexItem /> */}
 
 					<Abilities title={'Abilities'} />
 
