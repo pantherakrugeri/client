@@ -52,85 +52,94 @@ const styles = (theme) => ({
 });
 
 class Abilities extends React.Component {
-	state = {};
+	constructor(props) {
+		super(props);
+		this.state = {
+			strength: '',
+			dexterity: '',
+			constitution: '',
+			intelligence: '',
+			wisdom: '',
+			charisma: '',
+			loading: false,
+		};
 
-	componentDidMount() {
-		this.getAbilities();
+		//this.abilityConfig = this.abilityConfig.bind(this);
+	}
+
+	initialAbilitiesConfig = [];
+
+	async componentDidMount() {
+		this.setState({ loading: true });
+		const res = await Axios.get('http://localhost:3000/api/abilities');
+
+		this.initialAbilitiesConfig = res.data.data;
+		this.abilityConfig(res.data);
+		this.setState({ loading: false });
+
 		let persistedAbilities = localStorage.getItem('abilities');
 
 		if (persistedAbilities === null) {
 			abilityData.map(({ abilityName, ...Args }, index) =>
-				this.setState({ [abilityName]: 0 })
+				this.setState({ [abilityName.toLowerCase()]: 0 })
 			);
 		}
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
-		//let persistedAbilities = localStorage.getItem('abilities');
-		//localStorage.setItem('abilities', JSON.stringify(this.state));
+		//console.log(prevState);
+		// let persistedAbilities = localStorage.getItem('abilities');
+		// localStorage.setItem('abilities', JSON.stringify(this.state));
+		// console.log('persistedAbilities: ', JSON.parse(persistedAbilities));
 	}
 
-	getAbilities() {
-		let abilityData = [];
-		Axios.get('http://localhost:3000/api/abilities')
-			.then(function (response) {
-				// handle success
-				console.log(response);
+	onAbilityChange = (event) => {
+		event.preventDefault();
+		this.setState({ [event.target.name]: event.target.value });
+	};
 
-				abilityData = response.data.data.map(
-					({ abilityName, abilityId, ...Args }, index) => (
-						<li key={abilityId}>
-							<Ability
-								//print
-								abilityName={abilityName}
-								abilityValue={0}
-								inputProps={{ min: 0 }}
-								abilityType={Args.abilityType}
-								onChange={(e) =>
-									this.onAbilityChange(abilityName, e.target.value)
-								}
-							/>
-						</li>
-					)
-				);
-			})
-			.catch(function (error) {
-				// handle error
-				console.log(error);
-			})
-			.then(function () {
-				return abilityData;
-			});
-	}
+	abilityConfig = () =>
+		this.initialAbilitiesConfig.map(
+			({ abilityName, abilityId, abilityValue, ...Args }) => (
+				<li key={abilityId}>
+					<Ability
+						abilityId={abilityId.toString()}
+						abilityName={abilityName}
+						abilityValue={this.state[abilityName.toLowerCase()]}
+						inputProps={{ min: 0 }}
+						abilityType={Args.abilityType}
+						onChange={this.onAbilityChange}
+					/>
+				</li>
+			)
+		);
 
-	onAbilityChange(ability, val) {
-		console.log('onAbilityChange was called');
-		this.setState({ [ability]: val });
-	}
-
-	abilityList = abilityData.map(
-		({ abilityName, abilityId, abilityValue, ...Args }, index) => (
-			<li key={abilityId + index}>
+	abilityList = () =>
+		abilityData.map(({ abilityName, abilityId, abilityValue, ...Args }) => (
+			<li key={abilityId}>
 				<Ability
-					//print
+					abilityId={abilityId}
 					abilityName={abilityName}
-					abilityValue={this.state.abilityValue}
+					abilityValue={this.state[abilityName.toLowerCase()]}
 					inputProps={{ min: 0 }}
 					abilityType={Args.abilityType}
-					onChange={(e) => this.onAbilityChange(abilityName, e.target.value)}
+					onChange={this.onAbilityChange}
 				/>
 			</li>
-		)
-	);
+		));
 
 	render() {
 		const { classes } = this.props;
+
 		return (
 			<div className={classes.root}>
 				<Typography variant='h6' color='secondary' className={classes.heading}>
 					{this.props.title}
 				</Typography>
-				<ul style={{ listStyleType: 'none' }}>{this.abilityList}</ul>
+
+				{/* <ul style={{ listStyleType: 'none' }}>{this.abilityList()}</ul> */}
+
+				<ul style={{ listStyleType: 'none' }}>{this.abilityConfig()}</ul>
 			</div>
 		);
 	}
