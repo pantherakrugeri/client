@@ -1,12 +1,14 @@
 import React from 'react';
 import { useState } from 'react';
-import { Typography, makeStyles, Divider } from '@material-ui/core';
-
-import Grid from '@material-ui/core/Grid';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
-import InputLabel from '@material-ui/core/InputLabel';
-import Button from '@material-ui/core/Button';
+import {
+	Typography,
+	makeStyles,
+	Grid,
+	FormControl,
+	Select,
+	InputLabel,
+	Button,
+} from '@material-ui/core';
 import Abilities from './Abilities';
 import GeneratedScores from './GeneratedScores';
 
@@ -297,8 +299,6 @@ function GenerateAbilities(props) {
 				</Grid>
 
 				<Grid id='right-container' item container>
-					{/* <Divider orientation='vertical' flexItem /> */}
-
 					<Abilities title={'Abilities'} />
 
 					<GeneratedScores

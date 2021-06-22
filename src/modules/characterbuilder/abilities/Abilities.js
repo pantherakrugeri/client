@@ -63,8 +63,6 @@ class Abilities extends React.Component {
 			charisma: '',
 			loading: false,
 		};
-
-		//this.abilityConfig = this.abilityConfig.bind(this);
 	}
 
 	initialAbilitiesConfig = [];
