@@ -17,6 +17,7 @@ function Ability(props) {
 			id={props.abilityId}
 			className={props.className}
 			label={props.abilityName}
+			name={props.abilityName.toLowerCase()}
 			type={props.abilityType}
 			value={props.abilityValue}
 			onChange={props.onChange}
