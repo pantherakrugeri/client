@@ -177,6 +177,7 @@ function GenerateAbilities(props) {
 	const handleGenerateAbilities = () => {
 		generateScores(1, 6);
 		if (methodstyle === 'choose') setShowResults(true);
+		else setShowResults(false);
 	};
 
 	let tempScores = [
