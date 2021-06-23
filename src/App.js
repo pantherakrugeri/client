@@ -1,7 +1,7 @@
 import './RootView';
 import RootView from './RootView';
 import './App.css';
-import NavBar from './components/layout/NavBar';
+import NavBar from './modules/layout/components/NavBar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {

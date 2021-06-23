@@ -299,7 +299,11 @@ function GenerateAbilities(props) {
 				</Grid>
 
 				<Grid id='right-container' item container>
-					<Abilities title={'Abilities'} />
+					<Abilities
+						title={'Abilities'}
+						methodStyle={methodstyle}
+						generationMethod={generationmethod}
+					/>
 
 					<GeneratedScores
 						scores={tempScores}
