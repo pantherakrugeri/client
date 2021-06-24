@@ -1,6 +1,6 @@
 import React from 'react';
-import Ability from './components/Ability';
-import Spinner from '../../layout/components/Spinner';
+import Ability from './Ability';
+import Spinner from '../../../layout/components/Spinner';
 import { Typography, withStyles } from '@material-ui/core';
 import Axios from 'axios';
 

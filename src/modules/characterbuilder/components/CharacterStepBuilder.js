@@ -3,7 +3,7 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import GenerateAbilities from './abilities/GenerateAbilities';
+import GenerateAbilities from '../abilities/components/GenerateAbilities';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
