@@ -1,11 +1,11 @@
 import React from 'react';
-import clsx from 'clsx';
+//import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import GenerateAbilities from '../abilities/components/GenerateAbilities';
-import StepConnector from '@material-ui/core/StepConnector';
+//import StepConnector from '@material-ui/core/StepConnector';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
@@ -33,28 +33,28 @@ const styles = (theme) => ({
 	},
 });
 
-const QontoConnector = withStyles({
-	alternativeLabel: {
-		top: 10,
-		left: 'calc(-50% + 16px)',
-		right: 'calc(50% + 16px)',
-	},
-	active: {
-		'& $line': {
-			borderColor: '#784af4',
-		},
-	},
-	completed: {
-		'& $line': {
-			borderColor: '#784af4',
-		},
-	},
-	line: {
-		borderColor: '#eaeaf0',
-		borderTopWidth: 3,
-		borderRadius: 1,
-	},
-})(StepConnector);
+// const QontoConnector = withStyles({
+// 	alternativeLabel: {
+// 		top: 10,
+// 		left: 'calc(-50% + 16px)',
+// 		right: 'calc(50% + 16px)',
+// 	},
+// 	active: {
+// 		'& $line': {
+// 			borderColor: '#784af4',
+// 		},
+// 	},
+// 	completed: {
+// 		'& $line': {
+// 			borderColor: '#784af4',
+// 		},
+// 	},
+// 	line: {
+// 		borderColor: '#eaeaf0',
+// 		borderTopWidth: 3,
+// 		borderRadius: 1,
+// 	},
+// })(StepConnector);
 
 class CharacterStepBuilder extends React.Component {
 	constructor(props) {
