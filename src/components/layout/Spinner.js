@@ -1,5 +1,5 @@
 import React from 'react';
-import '../layout.scss';
+import './layout.scss';
 import PropTypes from 'prop-types';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 //import Radium, { Style } from 'radium';

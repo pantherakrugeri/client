@@ -1,7 +1,7 @@
 import React from 'react';
 import Ability from './Ability';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import Spinner from '../../layout/components/Spinner';
+import Spinner from '../../layout/Spinner';
 import { withStyles } from '@material-ui/core';
 import Axios from 'axios';
 
