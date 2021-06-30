@@ -1,6 +1,5 @@
 import './RootView';
 import RootView from './RootView';
-import './App.css';
 import NavBar from './modules/layout/components/NavBar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
@@ -20,9 +19,11 @@ const theme = createMuiTheme({
 	palette: {
 		primary: {
 			main: '#4682B4',
+			color: '#4682B4',
 		},
 		secondary: {
 			main: '#B0C4DE',
+			color: '#B0C4DE',
 		},
 	},
 	typography: {
