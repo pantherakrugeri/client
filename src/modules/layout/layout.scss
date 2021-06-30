@@ -3,3 +3,20 @@
 .loader {
 	color: $primary-color;
 }
+
+.spin-container {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	color: $primary-color;
+}
+
+.spin-span {
+	margin: 10px;
+	vertical-align: middle;
+}
+
+.bold {
+	font-weight: bold;
+}

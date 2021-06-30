@@ -1,5 +1,6 @@
 import React from 'react';
 import Ability from './Ability';
+import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../../../layout/components/Spinner';
 import { Typography, withStyles } from '@material-ui/core';
 import Axios from 'axios';
@@ -84,20 +85,20 @@ class Abilities extends React.Component {
 		if (this.state.loading) {
 			return (
 				<div>
-					<Spinner />
+					<Spinner
+						spinnerIcon={faDiceD20}
+						iconSize='3x'
+						iconColor='gold'
+						iconClasses='fas vm-align'
+						spinnerText='Loading...'
+						spanClasses='spin-span x-large primeColor'
+					/>
 				</div>
 			);
 		} else {
 			return (
 				<div className={classes.root}>
-					<Typography
-						variant='h6'
-						color='secondary'
-						className={classes.heading}
-					>
-						{this.props.title}
-					</Typography>
-
+					<h3>{this.props.title}</h3>
 					<ul style={{ listStyleType: 'none' }}>{this.abilityConfig()}</ul>
 				</div>
 			);
