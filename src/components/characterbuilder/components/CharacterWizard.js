@@ -8,7 +8,7 @@ import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import StepConnector from '@material-ui/core/StepConnector';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import GenerateAbilities from '../abilities/components/GenerateAbilities';
+import GenerateAbilities from '../abilities/GenerateAbilities';
 import {
 	faDice,
 	faUser,
