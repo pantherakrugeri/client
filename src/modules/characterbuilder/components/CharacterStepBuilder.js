@@ -1,19 +1,60 @@
 import React from 'react';
+import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
 import GenerateAbilities from '../abilities/components/GenerateAbilities';
+import StepConnector from '@material-ui/core/StepConnector';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
 	root: {
+		fontWeight: 'bold',
+	},
+	active: {
 		fontWeight: '1000',
+		fontSize: '1.5rem',
+	},
+	circle: {
+		width: 8,
+		height: 8,
+		borderRadius: '50%',
+		backgroundColor: 'currentColor',
 	},
 	h2: {
 		color: '#4682B4',
 	},
+	bold: {
+		fontWeight: 'bold',
+	},
+	label: {
+		fontSize: '18px',
+	},
 });
+
+const QontoConnector = withStyles({
+	alternativeLabel: {
+		top: 10,
+		left: 'calc(-50% + 16px)',
+		right: 'calc(50% + 16px)',
+	},
+	active: {
+		'& $line': {
+			borderColor: '#784af4',
+		},
+	},
+	completed: {
+		'& $line': {
+			borderColor: '#784af4',
+		},
+	},
+	line: {
+		borderColor: '#eaeaf0',
+		borderTopWidth: 3,
+		borderRadius: 1,
+	},
+})(StepConnector);
 
 class CharacterStepBuilder extends React.Component {
 	constructor(props) {
@@ -45,19 +86,41 @@ class CharacterStepBuilder extends React.Component {
 			stepfeature = <GenerateAbilities title='Generate Abilities' />;
 		} else {
 			stepfeature = (
-				<div styles='margin: 100;'>
-					<h2>Place Holder</h2>
+				<div style={{ marginTop: '25px' }}>
+					<h3>Place Holder</h3>
 				</div>
 			);
 		}
 		return (
 			<div className={classes.root}>
-				<Stepper alternativeLabel nonLinear activeStep={this.state.step}>
+				<Stepper
+					alternativeLabel
+					nonLinear
+					activeStep={this.state.step}
+					classes={{
+						root: classes.root,
+						text: classes.text,
+					}}
+				>
 					<Step key='0'>
-						<StepLabel>Generate Abilities</StepLabel>
+						<StepLabel
+							classes={{
+								root: classes.root,
+								label: classes.label,
+							}}
+						>
+							Generate Abilities
+						</StepLabel>
 					</Step>
 					<Step key='1'>
-						<StepLabel>Choose Race</StepLabel>
+						<StepLabel
+							classes={{
+								root: classes.root,
+								label: classes.label,
+							}}
+						>
+							Choose Race
+						</StepLabel>
 					</Step>
 					<Step key='2'>
 						<StepLabel>Choose Class</StepLabel>
@@ -78,11 +141,7 @@ class CharacterStepBuilder extends React.Component {
 				>
 					Back
 				</Button>
-				<Button
-					variant='contained'
-					color='primary'
-					onClick={() => this.handleNext()}
-				>
+				<Button variant='contained' onClick={() => this.handleNext()}>
 					{this.state.step === this.stepLength ? 'Finish' : 'Next'}
 				</Button>
 				{stepfeature}

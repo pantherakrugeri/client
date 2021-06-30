@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import CharacterStepBuilder from './components/CharacterStepBuilder';
+import CharacterWizard from './components/CharacterWizard';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -47,13 +48,23 @@ const useStyles = makeStyles((theme) => ({
 		backgroundColor: theme.palette.background.paper,
 		display: 'flex',
 		height: '100%',
-		label: {
-			fontWeight: 'bolder',
-		},
+		width: '100%',
+	},
+	tab: {
+		fontSize: '16px',
+		fontWeight: '600',
+		textTransform: 'none',
+	},
+	selected: {
+		fontWeight: '1000',
 	},
 	tabs: {
-		borderRight: `1px solid ${theme.palette.divider}`,
-		fontWeight: 'bolder',
+		borderRight: theme.palette.primary.main,
+		width: '20%',
+		minWidth: '250px',
+		'& .Mui-selected': {
+			fontWeight: '750',
+		},
 	},
 	TabPanel: {
 		width: '100%',
@@ -68,6 +79,17 @@ export default function CharacterTabs() {
 		setValue(newValue);
 	};
 
+	let characterSteps = [
+		'Generate Abilities',
+		'Choose Race',
+		'Choose Class',
+		'Pick Skills',
+		'Buy Equipment',
+		'Finish Details',
+	];
+
+	let icons = ['dice', 'user', 'users', 'user-map', 'hiking', 'user-graduate'];
+
 	return (
 		<div className={classes.root}>
 			<Tabs
@@ -75,19 +97,28 @@ export default function CharacterTabs() {
 				variant='scrollable'
 				value={value}
 				onChange={handleChange}
-				aria-label='Vertical tabs example'
+				aria-label='Vertical tabs'
 				className={classes.tabs}
 				textColor='primary'
 			>
-				<Tab label='Character Generation' {...a11yProps(0)} />
-				<Tab label='Character Administration' {...a11yProps(1)} />
+				<Tab
+					className={classes.tab}
+					label='Character Generation'
+					{...a11yProps(0)}
+				/>
+				<Tab
+					className={classes.tab}
+					label='Character Administration'
+					{...a11yProps(1)}
+				/>
 			</Tabs>
 			<TabPanel value={value} index={0} className={classes.TabPanel}>
-				Character Generation Wizard
-				<CharacterStepBuilder />
+				<h1>Character Generation Wizard</h1>
+				<CharacterWizard steps={characterSteps} />
+				{/* <CharacterStepBuilder /> */}
 			</TabPanel>
-			<TabPanel value={value} index={1}>
-				Character Administration
+			<TabPanel value={value} index={1} className={classes.TabPanel}>
+				<h1>Character Administration</h1>
 			</TabPanel>
 		</div>
 	);

@@ -88,7 +88,7 @@ const GeneratedScores = (props) => {
 	if (props.methodStyle === 'choose') {
 		listItems = propList.map((section) => (
 			<div key={section.title} className={classes.list}>
-				<h4 className={classes.h4}>{section.title}</h4>
+				<h6 className={classes.h4}>{section.title}</h6>
 				<List key={section.title}>
 					{section.data.map((score, index) => {
 						return (
