@@ -1,4 +1,4 @@
-import CharacterTabs from './modules/characterbuilder/CharacterTabs';
+import CharacterTabs from './components/characterbuilder/CharacterTabs';
 
 function RootView() {
 	return <CharacterTabs />;

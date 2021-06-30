@@ -1,6 +1,6 @@
 import './RootView';
 import RootView from './RootView';
-import NavBar from './modules/layout/components/NavBar';
+import NavBar from './components/layout/components/NavBar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
