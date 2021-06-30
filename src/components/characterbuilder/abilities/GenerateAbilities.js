@@ -14,15 +14,16 @@ import GeneratedScores from './GeneratedScores';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		margin: 25,
+		margin: '50px 10px 10px 10px',
+		padding: '25px 15px 25px 50px',
 		border: '1.75px solid gray',
-		borderRadius: '10px',
+		borderRadius: '25px',
 		boxShadow: '2px 5px 8px gray',
-		padding: 50,
 	},
 	heading: {
-		textTransform: 'uppercase',
-		fontWeight: 'bolder',
+		marginBottom: '10px',
+		fontSize: '2.25rem',
+		fontWeight: '750',
 	},
 	formControl: {
 		margin: 0,
@@ -204,15 +205,16 @@ function GenerateAbilities(props) {
 
 	return (
 		<div className={classes.root} id='generateAbilities'>
+			<Typography
+				variant='h2'
+				color='primary'
+				align='center'
+				className={classes.heading}
+			>
+				- {props.title} -
+			</Typography>
+
 			<form noValidate autoComplete='off'>
-				<Typography
-					variant='h5'
-					color='primary'
-					align='center'
-					className={classes.heading}
-				>
-					{props.title}
-				</Typography>
 				<Grid
 					container
 					direction='row'
