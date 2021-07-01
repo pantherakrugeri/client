@@ -4,6 +4,7 @@ import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import Spinner from '../../layout/Spinner';
 import { withStyles } from '@material-ui/core';
 import Axios from 'axios';
+import Overlay from '../../layout/Overlay';
 
 const styles = (theme) => ({
 	root: {
@@ -85,6 +86,7 @@ class Abilities extends React.Component {
 		if (this.state.loading) {
 			return (
 				<div>
+					<Overlay />
 					<Spinner
 						spinnerIcon={faDiceD20}
 						iconSize='3x'
