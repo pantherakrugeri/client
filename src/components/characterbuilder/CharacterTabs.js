@@ -5,9 +5,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-//import CharacterStepBuilder from './CharacterStepBuilder';
 import CharacterWizard from './CharacterWizard';
-import CharacterBuilderState from '../../context/characterbuilder/CharacterBuilderState';
 
 function TabPanel(props) {
 	const { children, value, index, ...other } = props;
@@ -114,11 +112,8 @@ export default function CharacterTabs() {
 				/>
 			</Tabs>
 			<TabPanel value={value} index={0} className={classes.TabPanel}>
-				<CharacterBuilderState>
-					<h1>Character Generation Wizard</h1>
+				<h1>Character Generation Wizard</h1>
 					<CharacterWizard steps={characterSteps} />
-				</CharacterBuilderState>
-				{/* <CharacterStepBuilder /> */}
 			</TabPanel>
 			<TabPanel value={value} index={1} className={classes.TabPanel}>
 				<h1>Character Administration</h1>

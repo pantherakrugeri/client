@@ -31,7 +31,7 @@ const Abilities = (props) => {
 	const getAbilitiesConfig = async () => {
 		try {
 			setLoading(true);
-			const res = await Axios.get('http://localhost:3000/api/abilities');
+			const res = await Axios.get('http://localhost:3000/api/abilities?gamesystem=pathfinder');
 			setAbilitiesConfig(res.data.data);
 		} catch (error) {
 			console.log(error);
