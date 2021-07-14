@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
+import AppState from './context/app/AppState';
 
 ReactDOM.render(
 	// <React.StrictMode>
@@ -8,6 +9,8 @@ ReactDOM.render(
 	// </React.StrictMode>,
 	// document.getElementById('root')
 
-	<App />,
+	<AppState>
+		<App />
+	</AppState>,
 	document.getElementById('root')
 );

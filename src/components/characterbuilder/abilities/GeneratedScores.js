@@ -13,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
-		padding: 25,
+		//padding: 25,
 	},
 	heading: {
 		fontWeight: 'bolder',
@@ -34,8 +34,11 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const tooltipref = React.createRef();
+
 const HtmlTooltip = withStyles((theme) => ({
 	tooltip: {
+		ref: { tooltipref },
 		backgroundColor: '#f5f5f9',
 		color: 'rgba(0, 0, 0, 0.87)',
 		maxWidth: 220,
@@ -45,10 +48,16 @@ const HtmlTooltip = withStyles((theme) => ({
 	},
 }))(Tooltip);
 
-const GeneratedScores = (props) => {
+const GeneratedScores = (props, ref) => {
 	const classes = useStyles();
 
 	const propList = props.scores;
+
+	const onDragStart = (e) => {
+		console.log(e);
+		e.dataTransfer.setData('text', e.target.id);
+		console.log(e);
+	};
 
 	const getIcon = (die) => {
 		let dieText = null;
@@ -109,16 +118,25 @@ const GeneratedScores = (props) => {
 									</div>
 								}
 							>
-								<ListItem key={'item-' + score + index}>
-									<span className={classes.itemWidth}>{score}</span>
+								<div>
+									<ListItem
+										ref={React.createRef()}
+										id={'item-' + score + '-' + index + '-' + Math.random()}
+										key={'item-' + score + '-' + index + '-' + Math.random()}
+										draggable
+										onDragStart={onDragStart}
+										value={score}
+									>
+										<span className={classes.itemWidth}>{score}</span>
 
-									<FontAwesomeIcon
-										icon='dice-d20'
-										className={classes.diceIcon}
-										color='#4682B4'
-										size='2x'
-									/>
-								</ListItem>
+										<FontAwesomeIcon
+											icon='dice-d20'
+											className={classes.diceIcon}
+											color='#4682B4'
+											size='2x'
+										/>
+									</ListItem>
+								</div>
 							</HtmlTooltip>
 						);
 					})}
@@ -131,14 +149,8 @@ const GeneratedScores = (props) => {
 
 	return (
 		<div className={classes.root}>
-			<Typography
-				variant='h6'
-				color='secondary'
-				align='center'
-				className={classes.heading}
-			>
-				{props.title}
-			</Typography>
+			<h3>{props.title}</h3>
+
 			<Grid direction='row' container spacing={2}>
 				{listItems}
 			</Grid>

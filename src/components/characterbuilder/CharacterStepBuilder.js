@@ -10,6 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = (theme) => ({
 	root: {
+		flex: 1,
 		fontWeight: 'bold',
 	},
 	active: {

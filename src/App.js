@@ -1,6 +1,5 @@
 import './RootView';
 import RootView from './RootView';
-import NavBar from './components/layout/NavBar';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -14,6 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
+import TopBar from './components/layout/TopBar';
 
 const theme = createMuiTheme({
 	palette: {
@@ -35,7 +35,11 @@ function App() {
 	return (
 		<div>
 			<ThemeProvider theme={theme}>
-				<NavBar title='Pathfinder' icon='dice-d20' />
+				<TopBar
+					logo='dice-d20'
+					title='...find your game! : Pathfinder'
+					position='static'
+				></TopBar>
 				<RootView />
 			</ThemeProvider>
 		</div>

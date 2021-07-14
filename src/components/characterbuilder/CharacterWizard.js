@@ -17,6 +17,7 @@ import {
 	faHiking,
 	faUserGraduate,
 } from '@fortawesome/free-solid-svg-icons';
+import CharacterWizardTemplate from '../layout/CharacterWizardTemplate';
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -132,16 +133,19 @@ const CharacterWizard = ({ steps }) => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
 
-	let stepfeature = null;
-	if (activeStep === 0) {
-		stepfeature = <GenerateAbilities title='Generate Abilities' />;
-	} else {
-		stepfeature = (
-			<div style={{ marginTop: '25px' }}>
-				<h3>Place Holder</h3>
-			</div>
+	const stepFeature = (activeStep) => {
+		let feature = null;
+		let children = null;
+		if (activeStep === 0) {
+			children = <GenerateAbilities title='Generate Abilities' />;
+		}
+		feature = (
+			<CharacterWizardTemplate title={steps[activeStep]}>
+				{children}
+			</CharacterWizardTemplate>
 		);
-	}
+		return feature;
+	};
 
 	return (
 		<div className={classes.root}>
@@ -173,7 +177,7 @@ const CharacterWizard = ({ steps }) => {
 					{activeStep === steps.length - 1 ? 'Finish' : 'Next'}
 				</Button>
 			</div>
-			{stepfeature}
+			{stepFeature(activeStep)}
 		</div>
 	);
 };

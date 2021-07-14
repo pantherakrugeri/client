@@ -13,8 +13,10 @@ function Ability(props) {
 	}
 	return (
 		<TextField
+			onDragOver={props.onDragOver}
+			onDrop={props.onDrop}
 			inputProps={props.inputProps}
-			id={props.abilityId}
+			id={props.id}
 			className={props.className}
 			label={props.abilityName}
 			name={props.abilityName.toLowerCase()}
