@@ -50,7 +50,6 @@ const Abilities = (props) => {
 			abilitiesConfig.forEach(function callbackFn(element, index) {
 				const abilityStateName = element.abilityName.toLowerCase();
 				tempAbilities[abilityStateName] = '';
-				//abilities[abilityStateName] = '';
 			}, this);
 		};
 
