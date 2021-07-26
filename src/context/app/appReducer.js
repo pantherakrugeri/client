@@ -1,6 +1,6 @@
 import { SET_GAMESYSTEM } from '../types';
 
-export default (state, action) => {
+const appReducer = (state, action) => {
 	switch (action.type) {
 		case SET_GAMESYSTEM:
 			return {
@@ -11,3 +11,5 @@ export default (state, action) => {
 			return state;
 	}
 };
+
+export default appReducer;
