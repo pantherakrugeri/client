@@ -242,7 +242,7 @@ function GenerateAbilities(props) {
 	return (
 		<div className={classes.root} id='generateAbilities'>
 			<form noValidate autoComplete='off'>
-				<Grid container xs={12} className={classes.rootGrid}>
+				<Grid container className={classes.rootGrid}>
 					<Grid item xs={2} className={classes.initialContainer}>
 						<h3>Method</h3>
 
