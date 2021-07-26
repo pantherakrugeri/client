@@ -44,15 +44,20 @@ const Abilities = (props) => {
 	}, [appContext.gamesystem]);
 
 	useEffect(() => {
+		let tempAbilities = {};
+
 		const setInitialAbilities = () => {
 			abilitiesConfig.forEach(function callbackFn(element, index) {
 				const abilityStateName = element.abilityName.toLowerCase();
-				abilities[abilityStateName] = '';
+				tempAbilities[abilityStateName] = '';
+				//abilities[abilityStateName] = '';
 			}, this);
 		};
 
+		setAbilities(tempAbilities);
+
 		setInitialAbilities();
-	}, [abilitiesConfig, abilities]);
+	}, [abilitiesConfig]);
 
 	const onAbilityChange = (e) => {
 		const { name, value } = e.target;
