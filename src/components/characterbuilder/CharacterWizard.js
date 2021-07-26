@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useCallback } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -124,9 +124,9 @@ const CharacterWizard = ({ steps, onStepTitle }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
 
-	const handleStepTitle = () => {
+	const handleStepTitle = useCallback(() => {
 		onStepTitle(steps[activeStep]);
-	};
+	}, [steps, activeStep, onStepTitle]);
 
 	useLayoutEffect(() => {
 		handleStepTitle();
