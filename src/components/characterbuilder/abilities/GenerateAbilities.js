@@ -21,11 +21,7 @@ const useStyles = makeStyles((theme) => ({
 		fontWeight: '750',
 	},
 	formControl: {
-		padding: theme.spacing(0),
-		margin: '5px',
-		minWidth: '170px',
-		display: 'inline-flex',
-		flexDirection: 'column',
+		width: '100%',
 	},
 	formLabel: {
 		fontWeight: 'bold',
@@ -55,7 +51,8 @@ const useStyles = makeStyles((theme) => ({
 		width: '225px',
 	},
 	button: {
-		minWidth: '170px',
+		width: '100%',
+		marginTop: '10px',
 	},
 	rootGrid: {
 		display: 'flex',
