@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
 	makeStyles,
 	withStyles,
-	Typography,
 	List,
 	ListItem,
 	Grid,
