@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -96,9 +96,8 @@ const ColorlibConnector = withStyles({
 	},
 })(StepConnector);
 
-function ColorlibStepIcon(props) {
+function ColorlibStepIcon({ active, completed, icon }) {
 	const classes = useColorlibStepIconStyles();
-	const { active, completed } = props;
 
 	const icons = {
 		1: <FontAwesomeIcon icon={faDice} size='2x' />,
@@ -116,14 +115,22 @@ function ColorlibStepIcon(props) {
 				[classes.completed]: completed,
 			})}
 		>
-			{icons[String(props.icon)]}
+			{icons[String(icon)]}
 		</div>
 	);
 }
 
-const CharacterWizard = ({ steps }) => {
+const CharacterWizard = ({ steps, onStepTitle }) => {
 	const classes = useStyles();
 	const [activeStep, setActiveStep] = React.useState(0);
+
+	const handleStepTitle = () => {
+		onStepTitle(steps[activeStep]);
+	};
+
+	useLayoutEffect(() => {
+		handleStepTitle();
+	}, [handleStepTitle]);
 
 	const handleNext = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -136,14 +143,12 @@ const CharacterWizard = ({ steps }) => {
 	const stepFeature = (activeStep) => {
 		let feature = null;
 		let children = null;
+
 		if (activeStep === 0) {
 			children = <GenerateAbilities title='Generate Abilities' />;
 		}
-		feature = (
-			<CharacterWizardTemplate title={steps[activeStep]}>
-				{children}
-			</CharacterWizardTemplate>
-		);
+		feature = <CharacterWizardTemplate>{children}</CharacterWizardTemplate>;
+
 		return feature;
 	};
 

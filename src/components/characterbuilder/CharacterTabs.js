@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
@@ -68,11 +68,16 @@ const useStyles = makeStyles((theme) => ({
 	TabPanel: {
 		width: '100%',
 	},
+	htag: {
+		display: 'inline',
+		fontSize: '1.5rem',
+	},
 }));
 
 export default function CharacterTabs() {
 	const classes = useStyles();
 	const [value, setValue] = React.useState(0);
+	const [stepTitle, setStepTitle] = React.useState('');
 
 	const handleChange = (event, newValue) => {
 		setValue(newValue);
@@ -86,6 +91,10 @@ export default function CharacterTabs() {
 		'Buy Equipment',
 		'Finish Details',
 	];
+
+	const handleStepTitle = (value) => {
+		setStepTitle(value);
+	};
 
 	//let icons = ['dice', 'user', 'users', 'user-map', 'hiking', 'user-graduate'];
 
@@ -112,11 +121,13 @@ export default function CharacterTabs() {
 				/>
 			</Tabs>
 			<TabPanel value={value} index={0} className={classes.TabPanel}>
-				<h1>Character Generation Wizard</h1>
-					<CharacterWizard steps={characterSteps} />
+				<h1 className={classes.htag}>Character Generation Wizard</h1>
+				<h1 className={classes.htag}> | {stepTitle}</h1>
+
+				<CharacterWizard steps={characterSteps} onStepTitle={handleStepTitle} />
 			</TabPanel>
 			<TabPanel value={value} index={1} className={classes.TabPanel}>
-				<h1>Character Administration</h1>
+				<h1 className={classes.htag}>Character Administration</h1>
 			</TabPanel>
 		</div>
 	);
