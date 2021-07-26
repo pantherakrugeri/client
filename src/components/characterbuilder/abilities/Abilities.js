@@ -17,13 +17,20 @@ const styles = (theme) => ({
 	label: {
 		fontWeight: 'bold',
 	},
+	abilityInput: {
+		width: '100%',
+	},
 });
 
 const Abilities = (props) => {
 	const appContext = useContext(AppContext);
 	const [abilitiesConfig, setAbilitiesConfig] = useState([]);
 	const [abilities, setAbilities] = useState({});
+	const [minValue, setMinValue] = useState(3);
+	const [maxValue, setMaxValue] = useState(18);
 	const [loading, setLoading] = useState(false);
+
+	const { classes } = props;
 
 	useEffect(() => {
 		const getAbilitiesConfig = async () => {
@@ -33,6 +40,11 @@ const Abilities = (props) => {
 					`http://localhost:3000/api/abilities?gamesystem=${appContext.gamesystem}`
 				);
 				setAbilitiesConfig(res.data.data);
+
+				if (appContext.gamesystem === 'rolemaster') {
+					setMinValue(1);
+					setMaxValue(100);
+				}
 			} catch (error) {
 				console.log(error);
 			} finally {
@@ -101,8 +113,10 @@ const Abilities = (props) => {
 					abilityName={abilityName}
 					abilityType={Args.abilityType}
 					abilityValue={abilities[abilityName.toLowerCase()]}
+					className={classes.abilityInput}
 					inputProps={{
-						min: 0,
+						min: minValue,
+						max: maxValue,
 						onDrop: onDrop,
 						onDragOver: onDragOver,
 						onDragLeave: onDragLeave,
@@ -117,8 +131,6 @@ const Abilities = (props) => {
 			</li>
 		)
 	);
-
-	const { classes } = props;
 
 	if (loading) {
 		return (
