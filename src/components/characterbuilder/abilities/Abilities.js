@@ -26,33 +26,33 @@ const Abilities = (props) => {
 	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
+		const getAbilitiesConfig = async () => {
+			try {
+				setLoading(true);
+				const res = await Axios.get(
+					`http://localhost:3000/api/abilities?gamesystem=${appContext.gamesystem}`
+				);
+				setAbilitiesConfig(res.data.data);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoading(false);
+			}
+		};
+
 		getAbilitiesConfig();
 	}, [appContext.gamesystem]);
 
 	useEffect(() => {
+		const setInitialAbilities = () => {
+			abilitiesConfig.forEach(function callbackFn(element, index) {
+				const abilityStateName = element.abilityName.toLowerCase();
+				abilities[abilityStateName] = '';
+			}, this);
+		};
+
 		setInitialAbilities();
-	}, [abilitiesConfig]);
-
-	const getAbilitiesConfig = async () => {
-		try {
-			setLoading(true);
-			const res = await Axios.get(
-				`http://localhost:3000/api/abilities?gamesystem=${appContext.gamesystem}`
-			);
-			setAbilitiesConfig(res.data.data);
-		} catch (error) {
-			console.log(error);
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	const setInitialAbilities = () => {
-		abilitiesConfig.forEach(function callbackFn(element, index) {
-			const abilityStateName = element.abilityName.toLowerCase();
-			abilities[abilityStateName] = '';
-		}, this);
-	};
+	}, [abilitiesConfig, abilities]);
 
 	const onAbilityChange = (e) => {
 		const { name, value } = e.target;
